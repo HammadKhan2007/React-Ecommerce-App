@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShopSwift - Modern E‑Commerce</title>
+  <meta name="description" content="Discover products with fast search, filters, and a sleek shopping cart." />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#" aria-label="ShopSwift Home">
+        <span class="brand-logo">🛍️</span>
+        <span class="brand-name">ShopSwift</span>
+      </a>
+      <form id="searchForm" class="search" role="search" aria-label="Product search">
+        <input id="searchInput" type="search" placeholder="Search products..." autocomplete="off" />
+      </form>
+      <div class="header-actions">
+        <label class="sort">
+          <span class="sr-only">Sort products</span>
+          <select id="sortSelect" aria-label="Sort products">
+            <option value="relevance">Sort: Relevance</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating-desc">Rating: High to Low</option>
+            <option value="name-asc">Name: A to Z</option>
+          </select>
+        </label>
+        <button id="filterToggle" class="btn ghost only-mobile" aria-controls="filters" aria-expanded="false">Filters</button>
+        <button id="cartToggle" class="btn icon" aria-haspopup="dialog" aria-controls="cartDrawer" aria-expanded="false">
+          <span class="sr-only">Open cart</span>
+          <span>🛒</span>
+          <span id="cartCount" class="badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container page">
+    <aside id="filters" class="filters" aria-label="Filters">
+      <div class="filters-header only-mobile">
+        <h2>Filters</h2>
+        <button id="filtersClose" class="btn icon" aria-label="Close filters">✕</button>
+      </div>
+
+      <section class="filter-group">
+        <h3>Category</h3>
+        <div id="categoryList" class="checkbox-list"></div>
+      </section>
+
+      <section class="filter-group">
+        <h3>Price</h3>
+        <div class="price-inputs">
+          <label>
+            <span>Min</span>
+            <input id="priceMin" type="number" inputmode="decimal" placeholder="0" min="0" />
+          </label>
+          <label>
+            <span>Max</span>
+            <input id="priceMax" type="number" inputmode="decimal" placeholder="5000" min="0" />
+          </label>
+          <button id="priceApply" class="btn">Apply</button>
+        </div>
+      </section>
+
+      <section class="filter-group">
+        <h3>Minimum rating</h3>
+        <select id="ratingMin" aria-label="Minimum product rating">
+          <option value="0">Any rating</option>
+          <option value="4">4★ and up</option>
+          <option value="3">3★ and up</option>
+          <option value="2">2★ and up</option>
+          <option value="1">1★ and up</option>
+        </select>
+      </section>
+
+      <div class="filters-footer">
+        <button id="clearFilters" class="btn ghost">Clear all</button>
+        <button id="applyFilters" class="btn only-mobile">Show results</button>
+      </div>
+    </aside>
+
+    <section class="results">
+      <div class="results-head">
+        <div class="results-count">
+          <strong id="resultCount">0</strong> products
+          <span id="filtersSummary" class="filters-summary"></span>
+        </div>
+      </div>
+
+      <div id="productGrid" class="grid" aria-live="polite" aria-busy="false"></div>
+    </section>
+  </main>
+
+  <div id="overlay" class="overlay" hidden></div>
+
+  <aside id="cartDrawer" class="drawer" role="dialog" aria-modal="true" aria-label="Shopping cart" hidden>
+    <header class="drawer-header">
+      <h2>Cart</h2>
+      <button id="cartClose" class="btn icon" aria-label="Close cart">✕</button>
+    </header>
+    <div id="cartItems" class="cart-items"></div>
+    <footer class="drawer-footer">
+      <div class="totals">
+        <span>Subtotal</span>
+        <strong id="cartSubtotal">$0.00</strong>
+      </div>
+      <button id="checkoutBtn" class="btn primary">Checkout</button>
+    </footer>
+  </aside>
+
+  <section id="quickView" class="modal" role="dialog" aria-modal="true" hidden>
+    <div class="modal-card" role="document">
+      <button id="quickViewClose" class="btn icon modal-close" aria-label="Close">✕</button>
+      <div id="quickViewContent"></div>
+    </div>
+  </section>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
